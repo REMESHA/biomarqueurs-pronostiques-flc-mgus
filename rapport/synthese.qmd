@@ -1,0 +1,54 @@
+---
+title: "Deux biomarqueurs sanguins : que peut-on en conclure ?"
+subtitle: "Synthèse pour un public non statisticien"
+author: "Guy Darcy Remesha · 3 novembre 2026"
+lang: fr
+format:
+  typst:
+    papersize: a4
+    margin:
+      x: 1.8cm
+      y: 1.4cm
+    fontsize: 9.5pt
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+source("../R/rapport_utils.R")
+ef <- lire("A_effets.csv"); pr <- ef[3, ]; dc <- lire("A_delta_c.csv"); prof <- lire("A_profils.csv")
+ci <- lire("B_incidence.csv"); c20 <- ci[ci$horizon == 20, ]
+mo <- lire("B_modeles.csv"); cs <- mo[mo$modele == "Cox par cause : progression", ]
+cg <- lire("B_incidence_groupes.csv"); ac <- lire("B_auc_contraste.csv")
+a10 <- ac[ac$times == 10 & ac$model == "+ pic monoclonal" & ac$reference == "Âge et sexe", ]
+g <- function(x) cg$p[cg$groupe == x & cg$horizon == 20]
+flux <- lire("flux.csv"); n <- setNames(flux$n, paste(flux$partie, flux$etape))
+```
+
+**À retenir.** Ces deux marqueurs sont bien liés au risque, mais leur utilité pour une décision individuelle n'est pas démontrée. Un lien statistique et une utilité clinique sont deux questions différentes.
+
+## Ce qui a été étudié
+
+Deux jeux de données publics de la Mayo Clinic ont été analysés : `r format(n["A Inclus"], big.mark = " ")` habitants de 50 ans ou plus, et `r format(n["B Inclus"], big.mark = " ")` personnes atteintes de MGUS, une anomalie sanguine souvent sans symptôme qui peut rarement évoluer vers une maladie comme le myélome.
+
+## Chaînes légères libres et mortalité
+
+- **Résultat :** quand le taux de FLC double, le risque de décès à un instant donné augmente d'environ `r virg((pr$hr - 1) * 100, 0)` %, à âge, sexe et fonction rénale comparables.
+- **Exemple :** pour une femme de 65 ans à la fonction rénale normale, le risque de décès à 10 ans est estimé à `r pct(prof$risque10[1], 0)` avec un taux bas et à `r pct(prof$risque10[3], 0)` avec un taux élevé (quartiles de la population).
+- **Limite :** l'âge permet déjà de bien estimer ce risque. Le FLC n'ajoute qu'une amélioration modeste, sous l'objectif fixé à l'avance. Il semble refléter l'état de santé général plutôt qu'une maladie précise.
+- **Décision proposée :** réorienter vers des situations où ce marqueur pourrait changer une décision.
+
+## Pic monoclonal et évolution de la MGUS
+
+- **Résultat :** le risque d'évolution à 20 ans est de `r pct(g("1,5 g/dL ou plus"), 0)` si le pic atteint 1,5 g/dL, contre `r pct(g("Moins de 1,5 g/dL"), 0)` en dessous.
+- **Point de méthode important :** beaucoup de patients décèdent d'une autre cause avant toute évolution. Si l'on ignore ce fait, le risque à 20 ans est surestimé : `r pct(c20$prog_1_km, 0)` au lieu de `r pct(c20$prog_aj, 0)`.
+- **Limite :** avec seulement `r n["B Progressions, cas complets"]` évolutions analysées, le gain apporté pour classer les patients reste trop incertain.
+- **Décision proposée :** valider le résultat dans une cohorte plus grande avant d'en faire un outil de stratification.
+
+![](fig_incidence.png){width=68%}
+
+## Ce que ces résultats ne disent pas
+
+Ces analyses ne prouvent pas que ces marqueurs causent la maladie ou le décès. Elles ne disent rien de la réponse à un traitement et ne concernent que des populations américaines. Une validation dans d'autres populations reste nécessaire.

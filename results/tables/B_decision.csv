@@ -1,0 +1,3 @@
+"critere","regle","rempli"
+"Association","IC à 95 % du HR excluant 1",TRUE
+"Gain d'AUC à 10 ans","Gain ≥ 0,05 et IC excluant 0",FALSE

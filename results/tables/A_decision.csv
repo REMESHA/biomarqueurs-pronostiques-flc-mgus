@@ -1,0 +1,6 @@
+"critere","regle","rempli"
+"C1. Association","IC à 95 % du HR excluant 1",TRUE
+"C2. Ampleur","HR par doublement ≥ 1,20",TRUE
+"C3. Valeur ajoutée","Gain de C ≥ 0,01 et IC excluant 0",FALSE
+"C4. Calibration","Pente entre 0,90 et 1,10 à 5 et 10 ans",TRUE
+"C5. Robustesse","HR ≥ 1,10 et IC excluant 1 dans toutes les sensibilités",TRUE

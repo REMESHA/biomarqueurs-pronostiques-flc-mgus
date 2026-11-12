@@ -1,0 +1,18 @@
+results/derive/
+.Rhistory
+.RData
+.Rproj.user/
+.quarto/
+*_files/
+rapport/*.typ
+rapport/fig_*.png
+docs/*.typ
+
+# Fichiers personnels
+Explication_Projet1_Biomarqueurs_pronostiques.pdf
+Dictionnaire_variables_flchain_mgus2.xlsx
+R/notes_brutes_*.txt
+rapport_FLC_MGUS.html
+comment_lire_variables.png
+nom_variables_*.png
+docs/fig_incidence.png

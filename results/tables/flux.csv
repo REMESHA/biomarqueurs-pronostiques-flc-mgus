@@ -1,0 +1,17 @@
+"partie","etape","n"
+"A","Sujets dans flchain",7874
+"A","Exclus : suivi nul",3
+"A","Inclus",7871
+"A","Décès",2166
+"A","Créatinine manquante",1350
+"A","Cas complets",6521
+"A","Décès, cas complets",1959
+"B","Patients dans mgus2",1384
+"B","Exclus : temps nul",0
+"B","Inclus",1384
+"B","Progressions",115
+"B","Décès sans progression",860
+"B","Censurés",409
+"B","Cas complets",1338
+"B","Progressions, cas complets",112
+"B","Décès sans progression, cas complets",838
